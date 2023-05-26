@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {
   persistStore,
+  persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -8,8 +9,6 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-
-import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import shopsReducer from "./shop/shop-slice";
@@ -30,6 +29,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
+      ignoredActions: ["payload.headers"],
     }),
 });
 

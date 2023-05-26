@@ -1,7 +1,7 @@
 import { List, ListItem } from "@mui/material";
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import items from "./items";
-const Shops = () => {
+const ShopsNav = () => {
   const markup = items.map(({ id, text, link }) => {
     return (
       <ListItem key={id}>
@@ -11,4 +11,4 @@ const Shops = () => {
   });
   return <List sx={{ border: "1px solid black" }}> {markup}</List>;
 };
-export default Shops;
+export default ShopsNav;

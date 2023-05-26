@@ -1,12 +1,19 @@
-import Shops from "modules/Shops/Shops";
-// import ShopList from "modules/ShopList/ShopList";
-import { List, ListItem, Container } from "@mui/material";
+import ShopsNav from "modules/ShopsNav/ShopsNav";
+import ShopList from "modules/ShopList/ShopList";
+import { Container } from "@mui/material";
 
-const ShopPage = () => {
+const ShopPage = ({ setOrder }) => {
   return (
-    <Container>
-      <Shops></Shops>
-      {/* <ShopList></ShopList> */}
+    <Container
+      sx={{
+        display: "flex",
+        height: "100vh",
+        paddingBottom: 20,
+        alignContent: "stretch",
+      }}
+    >
+      <ShopsNav></ShopsNav>
+      <ShopList setOrder={setOrder}></ShopList>
     </Container>
   );
 };

@@ -1,0 +1,47 @@
+[
+    {
+        "title": " ilBK Royal Crispy Chicken",
+        "price": 180,
+        "shop": "il-molino"
+    },
+    {
+        "title": " ilBK Royal Crispy Chicken",
+        "price": 170,
+        "shop": "il-molino"
+    },
+    {
+        "title": "McSpicy BK Royal Crispy Chicken",
+        "price": 190,
+        "shop": "il-molino"
+    },
+    {
+        "title": "Spicy BKq Royal Crispy Chicken",
+        "price": 199,
+        "shop": "il-molino"
+    },
+    {
+        "title": "Original Chicken Sandwich",
+        "price": 100,
+        "shop": "il-molino"
+    },
+    {
+        "title": "McOriginal Chicken Sandwich",
+        "price": 140,
+        "shop": "il-molino"
+    },
+    {
+        "title": "ilBig Fish",
+        "price": 90,
+        "shop": "il-molino"
+    },
+    {
+        "title": "ilBig Fish",
+        "price": 240,
+        "shop": "il-molino"
+    },
+    {
+        "title": "il burder with cheese",
+        "price": 340,
+        "shop": "il-molino"
+    }
+]
