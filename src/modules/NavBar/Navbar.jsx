@@ -1,14 +1,8 @@
 import items from "./items";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { List, ListItem } from "@mui/material";
 
 const Navbar = () => {
-  const location = useLocation();
-
-  const isActive = (link) => {
-    return link === location.pathname;
-  };
-
   const markup = items.map(({ id, text, link }) => {
     return (
       <ListItem
@@ -20,15 +14,9 @@ const Navbar = () => {
       >
         <NavLink
           to={link}
-          style={
-            isActive(link)
-              ? {
-                  textDecoration: "none",
-                  backgroundColor: "tomato",
-                  borderRadius: 10,
-                }
-              : { textDecoration: "none" }
-          }
+          style={{
+            textDecoration: "none",
+          }}
           activeStyle={{
             textDecoration: "underline",
             fontWeight: "bold",
