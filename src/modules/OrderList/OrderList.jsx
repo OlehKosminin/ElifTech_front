@@ -33,10 +33,11 @@ const OrderList = ({ order, count, setOrdering }) => {
     }
   };
 
-  const subtractFromTotalPrice = (id) => {
+  const subtractFromTotalPrice = (price, id) => {
     const existingItem = state.find((item) => item.id === id);
     if (existingItem) {
       if (existingItem.count === 1) {
+        console.log("i work");
         setState((prevState) => prevState.filter((item) => item.id !== id));
       } else {
         const updatedItem = { ...existingItem, count: existingItem.count - 1 };
