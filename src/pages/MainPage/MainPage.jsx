@@ -1,4 +1,14 @@
 const MainPage = () => {
-  return <div> Hello in my App</div>;
+  return (
+    <div
+      style={{
+        alignItems: "center",
+        textAlign: "center",
+        fontSize: 200,
+      }}
+    >
+      Delivery App 'demo'
+    </div>
+  );
 };
 export default MainPage;

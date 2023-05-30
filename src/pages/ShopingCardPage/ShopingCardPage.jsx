@@ -5,6 +5,7 @@ import OrderList from "modules/OrderList/OrderList";
 import { Box } from "@mui/system";
 
 const ShopingCardPage = ({ order }) => {
+  const [ordering, setOrdering] = useState();
   const [count, setCount] = useState();
   return (
     <Container
@@ -14,8 +15,8 @@ const ShopingCardPage = ({ order }) => {
         alignContent: "stretch",
       }}
     >
-      <UserInfo />
-      <OrderList order={order} count={setCount} />
+      <UserInfo ordering={ordering} />
+      <OrderList order={order} count={setCount} setOrdering={setOrdering} />
       {count && <Box>total: {count}</Box>}
     </Container>
   );
