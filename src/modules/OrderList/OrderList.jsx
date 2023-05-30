@@ -3,14 +3,14 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductsById } from "redux/shop/shop-operation";
 
-const OrderList = ({ order, count }) => {
+const OrderList = ({ order, count, setOrdering }) => {
   const [state, setState] = useState([]);
   const items = useSelector((store) => store.shops.orders);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getProductsById(order));
-  }, []);
+  }, [dispatch, order]);
 
   useEffect(() => {
     const totalPrice = state.reduce(
@@ -18,8 +18,8 @@ const OrderList = ({ order, count }) => {
       0
     );
     count(totalPrice);
-    console.log("total:", totalPrice);
-  }, [state]);
+    setOrdering(state);
+  }, [count, setOrdering, state]);
 
   const addToTotalPrice = (price, id) => {
     const existingItem = state.find((item) => item.id === id);
@@ -33,7 +33,7 @@ const OrderList = ({ order, count }) => {
     }
   };
 
-  const subtractFromTotalPrice = (price, id) => {
+  const subtractFromTotalPrice = (id) => {
     const existingItem = state.find((item) => item.id === id);
     if (existingItem) {
       if (existingItem.count === 1) {
@@ -83,7 +83,7 @@ const OrderList = ({ order, count }) => {
           overflow: "auto",
         }}
       >
-        {markup}
+        {order.length === 0 ? <div>Take your order</div> : markup}
       </List>
     </>
   );
