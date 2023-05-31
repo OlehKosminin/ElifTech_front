@@ -6,6 +6,7 @@ import { getProductsById } from "redux/shop/shop-operation";
 const OrderList = ({ order, count, setOrdering }) => {
   const [state, setState] = useState([]);
   const items = useSelector((store) => store.shops.orders);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,7 +38,6 @@ const OrderList = ({ order, count, setOrdering }) => {
     const existingItem = state.find((item) => item.id === id);
     if (existingItem) {
       if (existingItem.count === 1) {
-        console.log("i work");
         setState((prevState) => prevState.filter((item) => item.id !== id));
       } else {
         const updatedItem = { ...existingItem, count: existingItem.count - 1 };
@@ -58,7 +58,7 @@ const OrderList = ({ order, count, setOrdering }) => {
           sx={{
             width: 150,
             height: 100,
-            backgroundColor: "tomato",
+            backgroundColor: "silver",
             marginBottom: 2,
           }}
         >
@@ -79,7 +79,7 @@ const OrderList = ({ order, count, setOrdering }) => {
         sx={{
           display: "grid",
           gap: 5,
-          gridTemplateColumns: "repeat(3,1fr)",
+          gridTemplateColumns: "repeat(2,1fr)",
           border: "1px solid black",
           overflow: "auto",
         }}

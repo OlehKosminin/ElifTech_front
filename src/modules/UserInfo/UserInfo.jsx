@@ -1,19 +1,29 @@
 import React, { useState } from "react";
 import { TextField, Button, Container } from "@mui/material";
+import { Notify } from "notiflix/build/notiflix-notify-aio";
+
+const initialState = {
+  name: "",
+  email: "",
+  address: "",
+  phone: "",
+};
 
 function UserInfo({ ordering }) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [address, setAddress] = useState("");
-  const [phone, setPhone] = useState("");
+  const [state, setState] = useState(initialState);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (ordering.length === 0) {
+      Notify.info("Take your orders");
+    }
+    if (state.name || state.address || state.email || state.phone === "") {
+      if (ordering.length === 0) {
+        Notify.warning("Fill in information about yourself");
+      }
+    }
     console.log({
-      name,
-      email,
-      address,
-      phone,
+      ...state,
       ordering,
     });
   };
@@ -23,37 +33,54 @@ function UserInfo({ ordering }) {
       <form onSubmit={handleSubmit}>
         <TextField
           label="Address"
-          value={address}
-          onChange={(event) => setAddress(event.target.value)}
+          onChange={(event) =>
+            setState((PrevState) => ({
+              ...PrevState,
+              address: event.target.value,
+            }))
+          }
           fullWidth
           margin="normal"
-          variant="outlined"
         />
         <TextField
           label="Email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
+          onChange={(event) =>
+            setState((PrevState) => ({
+              ...PrevState,
+              email: event.target.value,
+            }))
+          }
           fullWidth
           margin="normal"
-          variant="outlined"
         />
         <TextField
           label="Phone"
-          value={phone}
-          onChange={(event) => setPhone(event.target.value)}
+          onChange={(event) =>
+            setState((PrevState) => ({
+              ...PrevState,
+              phone: event.target.value,
+            }))
+          }
           fullWidth
           margin="normal"
-          variant="outlined"
         />
         <TextField
           label="Name"
-          value={name}
-          onChange={(event) => setName(event.target.value)}
+          onChange={(event) =>
+            setState((PrevState) => ({
+              ...PrevState,
+              name: event.target.value,
+            }))
+          }
           fullWidth
           margin="normal"
-          variant="outlined"
         />
-        <Button type="submit" variant="contained" color="primary">
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          // disabled={}
+        >
           send
         </Button>
       </form>

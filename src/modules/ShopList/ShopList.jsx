@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getProducts } from "redux/shop/shop-operation";
+
 const ShopList = ({ setOrder }) => {
   const items = useSelector((store) => store.shops.products);
   const [orders, setOrders] = useState([]);
@@ -16,7 +17,7 @@ const ShopList = ({ setOrder }) => {
 
   useEffect(() => {
     dispatch(getProducts(params));
-  }, [params]);
+  }, [dispatch, params]);
 
   const addToOrder = (data) => {
     const { _id } = data;
@@ -33,7 +34,7 @@ const ShopList = ({ setOrder }) => {
           sx={{
             width: 150,
             height: 100,
-            backgroundColor: "tomato",
+            backgroundColor: "silver",
             marginBottom: 2,
           }}
         >
