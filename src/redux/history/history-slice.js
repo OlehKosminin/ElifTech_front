@@ -45,7 +45,7 @@ const historySlice = createSlice({
       })
       .addCase(getHistoryByNumber.fulfilled, (store, { payload }) => {
         store.loading = false;
-        store.orders = payload;
+        store.orders = payload.data;
       })
       .addCase(getHistoryByNumber.rejected, (store, { payload }) => {
         store.loading = false;

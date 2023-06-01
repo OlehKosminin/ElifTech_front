@@ -7,6 +7,7 @@ import { getProducts } from "redux/shop/shop-operation";
 const ShopList = ({ setOrder }) => {
   const items = useSelector((store) => store.shops.products);
   const [orders, setOrders] = useState([]);
+  console.log("orders: ", orders);
 
   const dispatch = useDispatch();
   const params = useParams();

@@ -17,6 +17,7 @@ import historyReducer from "./history/history-slice";
 const persistConfig = {
   key: "root",
   storage,
+  whitelist: ["token"],
 };
 
 const persisteShopsReducer = persistReducer(persistConfig, shopsReducer);

@@ -1,22 +1,25 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Container, TextField, Button, Box, List } from "@mui/material";
+
 import {
-  Container,
-  TextField,
-  Button,
-  Box,
-  List,
-  ListItem,
-} from "@mui/material";
+  Form,
+  Photo,
+  Item,
+  ProductItem,
+  ProductInfoWraper,
+} from "./History.styled";
 
-import { Form } from "./History.styled";
-
-import { getAllHistory } from "redux/history/history-operation";
+import {
+  getAllHistory,
+  getHistoryByNumber,
+} from "redux/history/history-operation";
 
 const HistoryPage = () => {
   const [number, setNumber] = useState("380");
+  console.log("number: ", number);
+  const [phoneError, setPhoneError] = useState(true);
   const items = useSelector((store) => store.history.orders);
-  console.log("history: ", items);
 
   const dispatch = useDispatch();
 
@@ -26,19 +29,41 @@ const HistoryPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log();
+    console.log("number: ", number);
+    dispatch(getHistoryByNumber(number));
+  };
+
+  const handlePhoneChange = (e) => {
+    const value = e.target.value;
+    setNumber(value);
+    const phoneRegex = /^\d{12}$/;
+    setPhoneError(!phoneRegex.test(value));
   };
 
   const markup = items.map((item) => {
     console.log("item: ", item);
-    const orders = item.orders.map(({ id, price, count }) => {
-      return <div></div>;
+    const price = item.ordering.reduce(
+      (acc, item) => acc + item.price * item.count,
+      0
+    );
+    const markup = item.ordering.map((item) => {
+      return (
+        <ProductItem>
+          <Photo> photo</Photo>
+          <ProductInfoWraper>
+            <p>{item.title}</p>
+            <p>Price: {item.price}</p>
+            <p>Count: {item.count}</p>
+          </ProductInfoWraper>
+        </ProductItem>
+      );
     });
 
     return (
-      <ListItem key={item._id}>
-        <p>price: "{item.price}"</p>
-      </ListItem>
+      <Item key={item._id}>
+        {markup}
+        <p>Total price: "{price}"</p>
+      </Item>
     );
   });
 
@@ -54,18 +79,21 @@ const HistoryPage = () => {
           label="Number"
           value={number}
           onChange={(event) => {
-            setNumber(event.target.value);
+            handlePhoneChange(event);
           }}
           fullWidth
           margin="normal"
           variant="outlined"
           sx={{ width: "95%" }}
+          error={phoneError}
+          helperText={phoneError ? "Enter a valid phone number" : ""}
         />
         <Button
           type="submit"
           variant="contained"
           color="primary"
           sx={{ textAlign: "center" }}
+          disabled={phoneError ? true : false}
         >
           Search
         </Button>

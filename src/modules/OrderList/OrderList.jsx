@@ -6,6 +6,7 @@ import { getProductsById } from "redux/shop/shop-operation";
 const OrderList = ({ order, count, setOrdering }) => {
   const [state, setState] = useState([]);
   const items = useSelector((store) => store.shops.orders);
+  console.log("items: ", items);
 
   const dispatch = useDispatch();
 
@@ -22,57 +23,56 @@ const OrderList = ({ order, count, setOrdering }) => {
     setOrdering(state);
   }, [count, setOrdering, state]);
 
-  const addToTotalPrice = (price, id) => {
+  const addToTotalPrice = (id, title, price, shop) => {
     const existingItem = state.find((item) => item.id === id);
     if (existingItem) {
       const updatedItem = { ...existingItem, count: existingItem.count + 1 };
       setState((prevState) =>
         prevState.map((item) => (item.id === id ? updatedItem : item))
       );
-    } else {
-      setState((prevState) => [...prevState, { id, price, count: 1 }]);
     }
+    setState((prevState) => [
+      ...prevState,
+      { id, price, title, shop, count: 1 },
+    ]);
   };
 
-  const subtractFromTotalPrice = (price, id) => {
+  const subtractFromTotalPrice = (id, title, price, shop) => {
     const existingItem = state.find((item) => item.id === id);
     if (existingItem) {
       if (existingItem.count === 1) {
         setState((prevState) => prevState.filter((item) => item.id !== id));
-      } else {
-        const updatedItem = { ...existingItem, count: existingItem.count - 1 };
-        setState((prevState) =>
-          prevState.map((item) => (item.id === id ? updatedItem : item))
-        );
       }
+      const updatedItem = { ...existingItem, count: existingItem.count - 1 };
+      setState((prevState) =>
+        prevState.map((item) => (item.id === id ? updatedItem : item))
+      );
     }
   };
 
-  const markup = items.map(({ _id, title, price, shop }) => {
-    const item = state.find((item) => item.id === _id);
-    const count = item ? item.count : 0;
-
-    return (
-      <ListItem key={_id} style={{ display: "block" }}>
-        <Box
-          sx={{
-            width: 150,
-            height: 100,
-            backgroundColor: "silver",
-            marginBottom: 2,
-          }}
-        >
-          Image Url {shop}
-        </Box>
-        <Box sx={{ marginBottom: 2 }}>{title}</Box>
-        <Box sx={{ marginBottom: 2 }}>price {price}</Box>
-        <Button onClick={() => addToTotalPrice(price, _id)}>+</Button>
-        {count}
-        <Button onClick={() => subtractFromTotalPrice(price, _id)}>-</Button>
-      </ListItem>
-    );
-  });
-
+  const markup = items.map(({ _id, title, price, shop }) => (
+    <ListItem key={_id} style={{ display: "block" }}>
+      <Box
+        sx={{
+          width: 150,
+          height: 100,
+          backgroundColor: "silver",
+          marginBottom: 2,
+        }}
+      >
+        Image Url {shop}
+      </Box>
+      <Box sx={{ marginBottom: 2 }}>{title}</Box>
+      <Box sx={{ marginBottom: 2 }}>price {price}</Box>
+      <Button onClick={() => addToTotalPrice(_id, title, price, shop)}>
+        +
+      </Button>
+      {count}
+      <Button onClick={() => subtractFromTotalPrice(_id, title, price, shop)}>
+        -
+      </Button>
+    </ListItem>
+  ));
   return (
     <>
       <List
@@ -82,9 +82,22 @@ const OrderList = ({ order, count, setOrdering }) => {
           gridTemplateColumns: "repeat(2,1fr)",
           border: "1px solid black",
           overflow: "auto",
+          width: "100%",
         }}
       >
-        {order.length === 0 ? <div>Take your order</div> : markup}
+        {order.length === 0 ? (
+          <div
+            style={{
+              fontSize: "40px",
+              textAlign: "center",
+              margin: "auto",
+            }}
+          >
+            Take your order
+          </div>
+        ) : (
+          markup
+        )}
       </List>
     </>
   );

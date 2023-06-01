@@ -15,9 +15,8 @@ const ShopingCardPage = ({ order }) => {
         alignContent: "stretch",
       }}
     >
-      <UserInfo ordering={ordering} />
+      <UserInfo ordering={ordering} count={count} />
       <OrderList order={order} count={setCount} setOrdering={setOrdering} />
-      {count && <Box>total: {count}</Box>}
     </Container>
   );
 };
