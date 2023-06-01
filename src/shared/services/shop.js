@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://eliftece-back-end.onrender.com",
+  // baseURL: "https://eliftece-back-end.onrender.com",
+  baseURL: "http://localhost:3000/",
 });
 
 export const getProducts = async ({ shop }) => {
@@ -13,3 +14,5 @@ export const getProductsById = async (products) => {
   const result = await instance.post(`/api/products/`, products);
   return result;
 };
+
+export default instance;

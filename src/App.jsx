@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import Navbar from "./modules/NavBar";
 import ShopPage from "./pages/ShopPage";
 import ShopingCardPage from "pages/ShopingCardPage/ShopingCardPage";
+import HistoryPage from "pages/HistoryPage/HistoryPage";
 
 import NotFoundPage from "pages/NotFoundPage";
 import MainPage from "pages/MainPage/MainPage";
@@ -27,6 +28,7 @@ export const App = () => {
             path="/shop-card"
             element={<ShopingCardPage order={order} />}
           />
+          <Route path="/history" element={<HistoryPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
