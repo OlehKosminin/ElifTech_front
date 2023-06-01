@@ -17,7 +17,6 @@ import {
 
 const HistoryPage = () => {
   const [number, setNumber] = useState("380");
-  console.log("number: ", number);
   const [phoneError, setPhoneError] = useState(true);
   const items = useSelector((store) => store.history.orders);
 
@@ -29,7 +28,6 @@ const HistoryPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("number: ", number);
     dispatch(getHistoryByNumber(number));
   };
 
@@ -41,7 +39,6 @@ const HistoryPage = () => {
   };
 
   const markup = items.map((item) => {
-    console.log("item: ", item);
     const price = item.ordering.reduce(
       (acc, item) => acc + item.price * item.count,
       0
