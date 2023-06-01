@@ -7,7 +7,8 @@ This is a demo application about food delivery, where you can order food and eve
 
 git clone "prooject/url"
 
-##Comand to start 
+## Comand to start 
+
 ![image](https://github.com/OlehKosminin/ElifTech_front/assets/106763163/1c485507-5652-471d-a827-a071f1dbc092)
 
 
