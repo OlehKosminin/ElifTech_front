@@ -30,7 +30,6 @@ const shopSlice = createSlice({
         store.error = null;
       })
       .addCase(getProductsById.fulfilled, (store, { payload }) => {
-        console.log("payload: ", payload.data);
         store.loading = false;
         store.orders = payload.data;
       })

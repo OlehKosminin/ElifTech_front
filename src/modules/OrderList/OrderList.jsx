@@ -6,8 +6,6 @@ import { getProductsById } from "redux/shop/shop-operation";
 const OrderList = ({ order, count, setOrdering }) => {
   const [state, setState] = useState([]);
   const items = useSelector((store) => store.shops.orders);
-  console.log("items: ", items);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
